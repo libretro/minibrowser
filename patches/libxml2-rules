@@ -1,0 +1,24 @@
+--- rules.orig	2016-10-06 04:21:22.901332203 +0000
++++ rules	2016-10-06 04:21:57.866150106 +0000
+@@ -11,9 +11,9 @@
+ DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+ 
+ CC = $(DEB_HOST_GNU_TYPE)-gcc
+-CFLAGS = `dpkg-buildflags --get CFLAGS` -Wall -O3
+-LDFLAGS = `dpkg-buildflags --get LDFLAGS` -Wl,--as-needed
+-CPPFLAGS = `dpkg-buildflags --get CPPFLAGS`
++CFLAGS = `dpkg-buildflags --get CFLAGS` -Wall -O3 -fPIC -DPIC -DLIBXML_STATIC
++LDFLAGS = `dpkg-buildflags --get LDFLAGS` -Wl,--as-needed -fPIC
++CPPFLAGS = `dpkg-buildflags --get CPPFLAGS` -fPIC -DPIC -DLIBXML_STATIC
+ 
+ TARGETS := main $(PYVERS) $(PYVERS:%=%-dbg)
+ 
+@@ -32,7 +32,7 @@
+ export DH_OPTIONS
+ endif
+ 
+-CONFIGURE_FLAGS := --disable-silent-rules --with-history CC="$(CC)" CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" --cache-file="$(CURDIR)/builddir/config.cache"
++CONFIGURE_FLAGS := --with-pic=yes --disable-silent-rules --with-history CC="$(CC)" CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" --cache-file="$(CURDIR)/builddir/config.cache"
+ 
+ override_dh_auto_configure: $(TARGETS:%=doconfigure-%)
+ 

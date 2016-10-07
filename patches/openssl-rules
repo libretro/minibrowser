@@ -1,0 +1,46 @@
+--- rules.orig	2016-10-06 03:40:21.304175776 +0000
++++ rules	2016-10-06 03:41:02.957156840 +0000
+@@ -62,7 +62,7 @@
+ 	dh_testdir
+ #	perl util/ssldir.pl /usr/lib/ssl
+ #	chmod +x debian/libtool
+-	./Configure no-shared $(CONFARGS) debian-$(DEB_HOST_ARCH)
++	./Configure no-shared $(CONFARGS) debian-$(DEB_HOST_ARCH) -fPIC
+ 	make $(CROSS) -f Makefile depend
+ 	make $(CROSS) -f Makefile all
+ 	$(MAKE_TEST)
+@@ -72,14 +72,14 @@
+ 	test -z "$(OPTS)" || for opt in $(OPTS); \
+ 	do \
+ 		set -xe; \
+-		./Configure shared $(CONFARGS) debian-$(DEB_HOST_ARCH)-$$opt; \
++		./Configure shared $(CONFARGS) debian-$(DEB_HOST_ARCH)-$$opt -fPIC; \
+ 		make $(CROSS) -f Makefile all; \
+ 		$(MAKE_TEST); \
+ 		mkdir -p $$opt; \
+ 		mv libcrypto.so* libssl.so* $$opt/; \
+ 		make -f Makefile clean; \
+ 	done
+-	./Configure shared $(CONFARGS) debian-$(DEB_HOST_ARCH)
++	./Configure shared $(CONFARGS) debian-$(DEB_HOST_ARCH) -fPIC
+ 	#make $(CROSS) -f Makefile depend
+ 	ln -sf apps/openssl.pod crypto/crypto.pod ssl/ssl.pod doc/
+ #	make $(CROSS) -f Makefile linux-shared
+@@ -87,7 +87,7 @@
+ 	$(MAKE_TEST)
+ #	strip apps/openssl
+ #	make -f Makefile clean
+-#	./Configure --prefix=/usr --openssldir=/usr/lib/ssl no-idea no-mdc2 no-rc5 debian-$(DEB_HOST_ARCH)
++#	./Configure --prefix=/usr --openssldir=/usr/lib/ssl no-idea no-mdc2 no-rc5 debian-$(DEB_HOST_ARCH) -fPIC
+ #	make $(CROSS) -f Makefile all
+ 	touch build-stamp
+ 
+@@ -95,7 +95,7 @@
+ 	dh_testdir
+ 	dh_testroot
+ 	-rm -f build-stamp
+-	-./Configure $(CONFARGS) debian-$(DEB_HOST_ARCH)
++	-./Configure $(CONFARGS) debian-$(DEB_HOST_ARCH) -fPIC
+ 	-sed -i -e 's/rm -f/rm -rf/' Makefile
+ 	[ ! -f Makefile ] || make -f Makefile  clean clean-shared
+ 	#-make -f Makefile  dclean

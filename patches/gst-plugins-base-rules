@@ -1,0 +1,29 @@
+--- rules.orig	2016-10-06 02:26:20.589748666 +0000
++++ rules	2016-10-06 02:27:16.854932113 +0000
+@@ -10,9 +10,9 @@
+ 
+ DEB_DH_AUTORECONF_ARGS += --as-needed
+ 
+-CFLAGS += -Wno-error
+-CXXFLAGS += -Wno-error
+-LDFLAGS += -Wl,-z,defs -Wl,-O1 -Wl,--as-needed
++CFLAGS += -Wno-error -fPIC -DPIC
++CXXFLAGS += -Wno-error -fPIC -DPIC
++LDFLAGS += -Wl,-z,defs -Wl,-O1 -Wl,--as-needed -fPIC
+ DEB_MAKE_CHECK_TARGET = check || true
+ 
+ # upstream version with epoch
+@@ -134,8 +134,13 @@
+ DEB_CONFIGURE_EXTRA_FLAGS += \
+ 	--disable-failing-tests \
+ 	--disable-examples \
++	--disable-x \
++	--disable-xvideo \
++	--disable-xshm \
+ 	--enable-DEBUG \
+ 	--enable-debug \
++	--enable-static=yes \
++	--enable-shared=no \
+ 	--enable-experimental \
+ 	--libdir=\$${prefix}/lib/$(DEB_HOST_MULTIARCH) \
+ 	--with-package-name=$(GST_PACKAGE_NAME) \

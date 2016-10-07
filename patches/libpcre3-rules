@@ -1,0 +1,12 @@
+--- rules.orig	2016-10-06 20:18:10.010924239 +0000
++++ rules	2016-10-06 20:18:30.871446562 +0000
+@@ -41,7 +41,8 @@
+ 		$(ENABLE_JIT) \
+ 		--enable-pcre16 \
+ 		--enable-pcre32 \
+-		$(shell DEB_CFLAGS_MAINT_APPEND=-Wall DEB_BUILD_MAINT_OPTIONS=hardening=+all dpkg-buildflags --export=configure)
++		--with-pic=yes \
++		$(shell DEB_CFLAGS_MAINT_APPEND="-fPIC -Wall" DEB_BUILD_MAINT_OPTIONS=hardening=+all dpkg-buildflags --export=configure)
+ 	touch configure-stamp
+ 
+ build: build-arch build-indep

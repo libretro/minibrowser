@@ -1,0 +1,11 @@
+*.o
+Makefile*
+ui_*.h
+moc_*.cpp
+*.swp
+*.so*
+*.a
+*.user
+Debug
+Release
+.DS_Store

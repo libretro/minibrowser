@@ -1,0 +1,29 @@
+--- rules.orig	2016-10-06 04:34:40.840075199 +0000
++++ rules	2016-10-06 04:34:09.671341162 +0000
+@@ -20,7 +20,7 @@
+ export DEB_HOST_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+ export DEB_BUILD_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+ 
+-export LDFLAGS += -Wl,--as-needed
++export LDFLAGS += -Wl,--as-needed -fPIC
+ ifeq ($(DEB_BUILD_GNU_TYPE), $(DEB_HOST_GNU_TYPE))
+   confflags += --build $(DEB_HOST_GNU_TYPE) --with-tcl=/usr/lib/$(DEB_HOST_MULTIARCH)/tcl8.6
+   export CROSS_BUILDING=no
+@@ -30,7 +30,7 @@
+   export CROSS_BUILDING=yes
+ endif
+ 
+-export CFLAGS += -O2 -fno-strict-aliasing \
++export CFLAGS += -O2 -fno-strict-aliasing -fPIC \
+ 	-DSQLITE_SECURE_DELETE -DSQLITE_ENABLE_COLUMN_METADATA \
+ 	-DSQLITE_ENABLE_FTS3 -DSQLITE_ENABLE_FTS3_PARENTHESIS \
+ 	-DSQLITE_ENABLE_RTREE=1 -DSQLITE_SOUNDEX=1 \
+@@ -50,7 +50,7 @@
+ 	dh_testdir
+ 	dh_autoreconf --as-needed
+ 	dh_autotools-dev_updateconfig
+-	./configure --prefix=/usr --mandir="/usr/share/man" \
++	./configure --prefix=/usr --mandir="/usr/share/man" --with-pic=yes \
+ 	  $(confflags) --enable-threadsafe \
+ 	  --enable-load-extension \
+ 	  --enable-json1 \

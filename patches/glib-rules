@@ -1,0 +1,12 @@
+--- rules.orig	2016-10-06 03:19:02.622191624 +0000
++++ rules	2016-10-06 03:19:30.886880667 +0000
+@@ -16,6 +16,9 @@
+ # Enable parallel build support
+ DEB_BUILD_PARALLEL = 1
+ 
++CFLAGS += -fPIC
++LDFLAGS += -fPIC
++
+ # Ensure the build aborts when there are still references to undefined symbols
+ LDFLAGS += -Wl,-z,defs
+ 

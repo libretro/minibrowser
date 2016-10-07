@@ -1,0 +1,13 @@
+--- rules.orig	2016-10-06 03:15:54.033582605 +0000
++++ rules	2016-10-06 03:16:08.041925750 +0000
+@@ -17,8 +17,8 @@
+ DEB_HOST_ARCH_OS    ?= $(shell dpkg-architecture -qDEB_HOST_GNU_OS)
+ DEB_HOST_MULTIARCH  ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+ 
+-CFLAGS = `dpkg-buildflags --get CFLAGS` `dpkg-buildflags --get CPPFLAGS` -Wall -D_REENTRANT
+-LDFLAGS = `dpkg-buildflags --get LDFLAGS`
++CFLAGS = `dpkg-buildflags --get CFLAGS` `dpkg-buildflags --get CPPFLAGS` -Wall -D_REENTRANT -fPIC
++LDFLAGS = `dpkg-buildflags --get LDFLAGS` -fPIC
+ 
+ # binutils doesn't supply the prefixed version normally like GCC does so
+ # we can't just unconditionally use DEB_HOST_GNU_TYPE-ar

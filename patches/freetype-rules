@@ -1,0 +1,12 @@
+--- rules.orig	2016-10-06 03:02:21.789239942 +0000
++++ rules	2016-10-06 03:07:39.145330161 +0000
+@@ -18,6 +18,9 @@
+ endif
+ export DEB_CFLAGS_MAINT_APPEND += $(shell dpkg-buildflags --get CPPFLAGS)
+ 
++export DEB_CFLAGS_MAINT_APPEND += -fPIC
++export DEB_LDFLAGS_MAINT_APPEND += -fPIC
++
+ # always abort if there are any problems with the symbols file
+ DPKG_GENSYMBOLS_CHECK_LEVEL = 4
+ export DPKG_GENSYMBOLS_CHECK_LEVEL
