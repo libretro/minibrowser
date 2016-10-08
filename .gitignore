@@ -1,5 +1,5 @@
 *.o
-Makefile*
+Makefile
 ui_*.h
 moc_*.cpp
 *.swp
