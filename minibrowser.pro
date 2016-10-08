@@ -9,6 +9,11 @@ QT       += core gui webkit webkitwidgets
 #QMAKE_CC = gcc-4.8
 #QMAKE_CXX = g++-4.8
 
+asan {
+  QMAKE_CXXFLAGS += -fsanitize=address
+  QMAKE_LFLAGS += -fsanitize=address
+}
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = minibrowser
