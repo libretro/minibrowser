@@ -7,6 +7,7 @@ The browser uses the webkit-based QWebView class which is available in Qt versio
 If you want to compile the browser as a simple standalone desktop application (outside of libretro), you can do so with (assuming Qt 5.5 or earlier):
 
 qmake minibrowser-apptest.pro
+
 make
 
 To compile the libretro version, much more work is needed. A custom static build of Qt is required, with many options disabled (or set to be compiled in) to get rid of the extra dependencies and platform support that isn't used. Also, most system libraries, even if they do provide a static version to link with, usually are not provided with -fPIC enabled, so this is unsuitable for a libretro core.
