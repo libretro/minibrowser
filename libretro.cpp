@@ -179,8 +179,8 @@ static char browser_name[] = "minibrowser";
 static char *browser_argv[] = {browser_name, NULL};
 static int browser_argc = ARRAY_SIZE(browser_argv) - 1;
 
-static unsigned x_coord;
-static unsigned y_coord;
+static uint16_t x_coord;
+static uint16_t y_coord;
 
 /* Borrowed from RetroArch/gfx/drivers_font_renderer/freetype.c */
 static const char *font_paths[] = {
@@ -630,9 +630,24 @@ void NETRETROPAD_CORE_PREFIX(retro_run)(void)
 {
    int offset;
    int i;
+   bool mouse_left;
+   bool mouse_right;
+   uint16_t new_x_coord;
+   uint16_t new_y_coord;
 
    /* Update input states and send them if needed */
    retropad_update_input();
+
+   mouse_left = mouse.value[DESC_OFFSET(&mouse, 0, 0, RETRO_DEVICE_ID_MOUSE_LEFT)];
+   mouse_right = mouse.value[DESC_OFFSET(&mouse, 0, 0, RETRO_DEVICE_ID_MOUSE_RIGHT)];
+
+   new_x_coord = x_coord + mouse.value[DESC_OFFSET(&mouse, 0, 0, RETRO_DEVICE_ID_MOUSE_X)];
+   new_y_coord = y_coord + mouse.value[DESC_OFFSET(&mouse, 0, 0, RETRO_DEVICE_ID_MOUSE_Y)];
+
+   browserWin->onMouseInput(QtMouse(QPoint(x_coord, y_coord), QPoint(new_x_coord, new_y_coord), mouse_left, mouse_right));
+
+   x_coord += new_x_coord;
+   y_coord += new_y_coord;
 
    /* Combine RetroPad input states into one value */
    /*for (i = joypad.id_min; i <= joypad.id_max; i++) {

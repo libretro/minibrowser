@@ -19,6 +19,20 @@ struct QtKey {
    Qt::KeyboardModifier modifier;
 };
 
+struct QtMouse {
+  QtMouse(QPoint oldPos, QPoint newPos, bool left, bool right) :
+  oldPos(oldPos)
+  ,newPos(newPos)
+  ,left(left)
+  ,right(right)
+  {}
+
+  QPoint oldPos;
+  QPoint newPos;
+  bool left;
+  bool right;
+};
+
 class MiniBrowser : public QWidget
 {
   Q_OBJECT
@@ -31,6 +45,7 @@ public:
   const quint8* getImage();
   void onRetroPadInput(int button);
   void onRetroKeyInput(QtKey key, bool down);
+  void onMouseInput(QtMouse mouse);
 
 private slots:
   void onURLChanged();

@@ -3,6 +3,7 @@
 #include "libretro.h"
 #include <stdio.h>
 #include <QKeyEvent>
+#include <QMouseEvent>
 
 MiniBrowser::MiniBrowser(QWidget *parent) :
   QWidget(parent)
@@ -78,5 +79,36 @@ void MiniBrowser::onRetroKeyInput(QtKey key, bool down) {
 
     QApplication::postEvent(widget, eventDown);
     QApplication::postEvent(widget, eventUp);
+  }
+}
+
+void MiniBrowser::onMouseInput(QtMouse mouse) {
+  QWidget *widget = qApp->focusWidget();
+
+  if(widget) {
+    if(mouse.newPos != mouse.oldPos) {
+      printf("mouse moved to %u x %u\n", mouse.newPos.x(), mouse.newPos.y());
+      QMouseEvent *event = new QMouseEvent(QEvent::MouseMove, widget->mapFromGlobal(mouse.newPos), mouse.newPos, Qt::NoButton, Qt::NoButton, Qt::NoModifier);
+
+      QApplication::postEvent(widget, event);
+    }
+
+    if(mouse.left) {
+      printf("pressed left mouse button\n");
+      QMouseEvent *pressEvent = new QMouseEvent(QEvent::MouseButtonPress, widget->mapFromGlobal(mouse.newPos), mouse.newPos, Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+      QMouseEvent *releaseEvent = new QMouseEvent(QEvent::MouseButtonRelease, widget->mapFromGlobal(mouse.newPos), mouse.newPos, Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+
+      QApplication::postEvent(widget, pressEvent);
+      QApplication::postEvent(widget, releaseEvent);
+    }
+
+    if(mouse.right) {
+      printf("pressed right mouse button\n");
+      QMouseEvent *pressEvent = new QMouseEvent(QEvent::MouseButtonPress, widget->mapFromGlobal(mouse.newPos), mouse.newPos, Qt::RightButton, Qt::RightButton, Qt::NoModifier);
+      QMouseEvent *releaseEvent = new QMouseEvent(QEvent::MouseButtonRelease, widget->mapFromGlobal(mouse.newPos), mouse.newPos, Qt::RightButton, Qt::RightButton, Qt::NoModifier);
+
+      QApplication::postEvent(widget, pressEvent);
+      QApplication::postEvent(widget, releaseEvent);
+    }
   }
 }
