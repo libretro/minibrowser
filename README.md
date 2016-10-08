@@ -16,14 +16,23 @@ To compile Qt, you will need to download the "qt-everywhere-opensource-src" pack
 On an Ubuntu 16.04 x64 machine, at least the following system packages have been found to need recompilation to include -fPIC on their static libraries:
 
 libfreetype6
+
 libglib2.0-0
+
 libgstreamer1.0-0
+
 gstreamer1.0-plugins-base
+
 libicu55
+
 libpcre3
+
 libxml2
+
 libssl1.0.0
+
 libsqlite3-0
+
 zlib1g
 
 You will find in the patches/ directory, diffs of the debian/rules files for each of these which can be used to rebuild the packages with the appropriate flags using "dpkg-buildpackage". The resulting libraries should be copied into libs/ so that the minibrowser makefile can find them. Please see Makefile.libretro for an exact listing of each file within libs/ that is needed.
@@ -33,5 +42,7 @@ Currently several system fonts are searched and if found, will be used for text 
 Once all the required libraries are ready, then compile the libretro core with:
 
 /path/to/static/Qt/bin/qmake minibrowser.pro
+
 make
+
 make -f Makefile.libretro
