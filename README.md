@@ -47,3 +47,5 @@ Once all the required libraries are ready, then compile the libretro core with:
 make
 
 make -f Makefile.libretro
+
+A precompiled core for Linux x64 (made on Ubuntu 16.04) is available [here](http://buildbot.fiveforty.net/minibrowser_libretro.so).
