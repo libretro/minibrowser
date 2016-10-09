@@ -143,17 +143,6 @@ static struct descriptor analog = {
    .value = NULL
 };
 
-static struct descriptor keyboard = {
-   .device = RETRO_DEVICE_KEYBOARD,
-   .port_min = 0,
-   .port_max = 0,
-   .index_min = 0,
-   .index_max = 0,
-   .id_min = RETROK_BACKSPACE,
-   .id_max = RETROK_UNDO,
-   .value = NULL
-};
-
 static struct descriptor mouse = {
    .device = RETRO_DEVICE_MOUSE,
    .port_min = 0,
@@ -168,7 +157,6 @@ static struct descriptor mouse = {
 static struct descriptor *descriptors[] = {
    &joypad,
    &analog,
-   &keyboard,
    &mouse
 };
 
