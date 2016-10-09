@@ -1,0 +1,27 @@
+--- rules.orig	2016-10-09 01:46:20.211978085 +0000
++++ rules	2016-10-09 01:49:01.455896350 +0000
+@@ -9,9 +9,9 @@
+ 
+ DEB_DH_AUTORECONF_ARGS += --as-needed
+ 
+-CFLAGS += -Wno-error
+-CXXFLAGS += -Wno-error
+-LDFLAGS += -Wl,-z,defs -Wl,-O1 -Wl,--as-needed
++CFLAGS += -Wno-error -fPIC -DPIC
++CXXFLAGS += -Wno-error -fPIC -DPIC
++LDFLAGS += -Wl,-z,defs -Wl,-O1 -Wl,--as-needed -fPIC
+ DEB_MAKE_CHECK_TARGET = check || true
+ 
+ # this is for compatibility with dpkg-dev < 1.13.5, see
+@@ -171,6 +171,11 @@
+ 	--with-package-origin=$(GST_PACKAGE_ORIGIN) \
+ 	--enable-gtk-doc \
+ 	--enable-experimental \
++	--disable-x \
++	--enable-static=yes \
++	--enable-shared=no \
++	--enable-static-plugins \
++	--with-pic=yes \
+ 	--with-default-audiosink=$(DEFAULT_AUDIOSINK) \
+ 	--with-default-audiosrc=$(DEFAULT_AUDIOSRC) \
+ 	--with-default-videosink=$(DEFAULT_VIDEOSINK) \

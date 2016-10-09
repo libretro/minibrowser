@@ -1,0 +1,38 @@
+--- rules.orig	2016-10-09 02:04:07.314576333 +0000
++++ rules	2016-10-09 02:07:14.163784666 +0000
+@@ -9,9 +9,9 @@
+ 
+ DEB_DH_AUTORECONF_ARGS += --as-needed
+ 
+-CFLAGS += -Wno-error
+-CXXFLAGS += -Wno-error
+-LDFLAGS += -Wl,-z,defs -Wl,-O1 -Wl,--as-needed
++CFLAGS += -Wno-error -fPIC -DPIC
++CXXFLAGS += -Wno-error -fPIC -DPIC
++LDFLAGS += -Wl,-z,defs -Wl,-O1 -Wl,--as-needed -fPIC
+ DEB_MAKE_CHECK_TARGET = check || true
+ 
+ # this is for compatibility with dpkg-dev < 1.13.5, see
+@@ -209,6 +209,22 @@
+ 	--enable-DEBUG \
+ 	--enable-debug \
+ 	--enable-experimental \
++	--enable-static=yes \
++	--enable-shared=no \
++	--enable-static-plugins \
++	--with-pic=yes \
++	--disable-opengl \
++	--disable-gles2 \
++	--disable-egl \
++	--disable-wgl \
++	--disable-glx \
++	--disable-x11 \
++	--disable-wayland \
++	--disable-vulkan \
++	--disable-gl \
++	--disable-gtk3 \
++	--disable-sdl \
++	--disable-sdltest \
+ 	--with-package-name=$(GST_PACKAGE_NAME) \
+ 	--with-package-origin=$(GST_PACKAGE_ORIGIN) \
+ 	--disable-pvr

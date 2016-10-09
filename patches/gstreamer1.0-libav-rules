@@ -1,0 +1,27 @@
+--- rules.orig	2016-10-09 01:16:10.711672352 +0000
++++ rules	2016-10-09 01:19:09.907839436 +0000
+@@ -10,8 +10,8 @@
+ export DEB_BUILD_MAINT_OPTIONS=hardening=-all
+ include /usr/share/dpkg/buildflags.mk
+ 
+-CFLAGS += -Wno-error
+-LDFLAGS += -Wl,-z,defs -Wl,-O1 -Wl,--as-needed
++CFLAGS += -Wno-error -fPIC -DPIC
++LDFLAGS += -Wl,-z,defs -Wl,-O1 -Wl,--as-needed -fPIC
+ 
+ # Let's decide the package name and url depending on the distribution
+ DISTRO = "$(shell dpkg-vendor --query vendor)"
+@@ -35,7 +35,12 @@
+ DEB_CONFIGURE_EXTRA_FLAGS += --with-system-libav \
+                              --libdir=\$${prefix}/lib/$(DEB_HOST_MULTIARCH) \
+                              --with-package-name=$(GST_PACKAGE_NAME) \
+-                             --with-package-origin=$(GST_PACKAGE_ORIGIN)
++                             --with-package-origin=$(GST_PACKAGE_ORIGIN) \
++                             --with-pic=yes \
++                             --enable-gpl \
++                             --enable-static-plugins \
++                             --enable-static=yes \
++                             --enable-shared=no
+ 
+ DEB_INSTALL_DOCS_ALL += debian/README.Debian NEWS
+ 
