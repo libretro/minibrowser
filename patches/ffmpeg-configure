@@ -1,0 +1,1 @@
+./configure --disable-everything --disable-network --disable-swscale --enable-static --enable-pic --enable-libvpx --enable-decoder=theora,vorbis,libvpx,h264 --enable-demuxer=ogg,matroska,mov --enable-memalign-hack
