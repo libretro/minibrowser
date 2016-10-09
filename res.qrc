@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>unifont.ttf</file>
+        <file>left_ptr.png</file>
     </qresource>
 </RCC>
 

@@ -235,6 +235,7 @@ void NETRETROPAD_CORE_PREFIX(retro_init)(void)
    browserWin = new MiniBrowser;
    browserWin->resize(WIDTH, HEIGHT);
    browserWin->setImage(WIDTH, HEIGHT, QImage::Format_RGB32);
+   browserWin->setCursorEnabled(true);
    browserWin->show();
    browserApp->processEvents();
 
@@ -258,7 +259,8 @@ void NETRETROPAD_CORE_PREFIX(retro_deinit)(void)
 
    /* Free descriptor values */
    for (i = 0; i < ARRAY_SIZE(descriptors); i++) {
-      free(descriptors[i]->value);
+      if (descriptors[i]->value)
+         free(descriptors[i]->value);
       descriptors[i]->value = NULL;
    }
 }
@@ -646,8 +648,8 @@ void NETRETROPAD_CORE_PREFIX(retro_run)(void)
 
    browserWin->onMouseInput(QtMouse(QPoint(x_coord, y_coord), QPoint(new_x_coord, new_y_coord), mouse_left, mouse_right));
 
-   x_coord += new_x_coord;
-   y_coord += new_y_coord;
+   x_coord = new_x_coord;
+   y_coord = new_y_coord;
 
    /* Combine RetroPad input states into one value */
    /*for (i = joypad.id_min; i <= joypad.id_max; i++) {

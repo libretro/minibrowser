@@ -46,6 +46,7 @@ public:
   void onRetroPadInput(int button);
   void onRetroKeyInput(QtKey key, bool down);
   void onMouseInput(QtMouse mouse);
+  void setCursorEnabled(bool on);
 
 private slots:
   void onURLChanged();
@@ -57,6 +58,12 @@ private:
   Ui::MiniBrowser *ui;
   QImage m_img;
   QImage::Format m_format;
+  QImage m_cursor;
+  bool m_cursorEnabled;
+  QPoint m_mousePos;
+  bool m_mouseLeftDown;
+  bool m_mouseRightDown;
+  bool m_selectDown;
 };
 
 #endif // MINIBROWSER_H
