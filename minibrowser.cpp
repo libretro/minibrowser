@@ -147,8 +147,10 @@ void MiniBrowser::onMouseInput(QtMouse mouse) {
         // shift focus to the widget we just clicked on
         QWidget *w = qApp->widgetAt(m_mousePos);
 
-        if(w)
+        if(w) {
           w->setFocus();
+          widget = w;
+        }
       }
 
       QMouseEvent *pressEvent = new QMouseEvent(QEvent::MouseButtonPress, widget->mapFromGlobal(mouse.newPos), mouse.newPos, Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
