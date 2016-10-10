@@ -5,6 +5,8 @@
 #include <QKeyEvent>
 #include <QMouseEvent>
 
+#define JOYPAD_MOUSE_SPEED 20
+
 MiniBrowser::MiniBrowser(QWidget *parent) :
   QWidget(parent)
   ,ui(new Ui::MiniBrowser)
@@ -73,6 +75,21 @@ void MiniBrowser::onRetroPadInput(int button) {
       }else{
         ui->urlLineEdit->setFocus();
       }
+      break;
+    case RETRO_DEVICE_ID_JOYPAD_A:
+      onMouseInput(QtMouse(m_mousePos, m_mousePos, true, false));
+      break;
+    case RETRO_DEVICE_ID_JOYPAD_UP:
+      onMouseInput(QtMouse(m_mousePos, m_mousePos - QPoint(0, JOYPAD_MOUSE_SPEED), false, false));
+      break;
+    case RETRO_DEVICE_ID_JOYPAD_DOWN:
+      onMouseInput(QtMouse(m_mousePos, m_mousePos + QPoint(0, JOYPAD_MOUSE_SPEED), false, false));
+      break;
+    case RETRO_DEVICE_ID_JOYPAD_LEFT:
+      onMouseInput(QtMouse(m_mousePos, m_mousePos - QPoint(JOYPAD_MOUSE_SPEED, 0), false, false));
+      break;
+    case RETRO_DEVICE_ID_JOYPAD_RIGHT:
+      onMouseInput(QtMouse(m_mousePos, m_mousePos + QPoint(JOYPAD_MOUSE_SPEED, 0), false, false));
       break;
     default:
       break;

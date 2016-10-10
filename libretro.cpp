@@ -639,13 +639,6 @@ void NETRETROPAD_CORE_PREFIX(retro_run)(void)
    x_coord = new_x_coord;
    y_coord = new_y_coord;
 
-   /* Combine RetroPad input states into one value */
-   /*for (i = joypad.id_min; i <= joypad.id_max; i++) {
-      offset = DESC_OFFSET(&joypad, 0, 0, i);
-      if (joypad.value[offset])
-         input_state |= 1 << i;
-   }*/
-
    for (i = joypad.id_min; i <= joypad.id_max; i++)
    {
       offset = DESC_OFFSET(&joypad, 0, 0, i);
@@ -653,14 +646,6 @@ void NETRETROPAD_CORE_PREFIX(retro_run)(void)
       if (joypad.value[offset])
          browserWin->onRetroPadInput(offset);
    }
-
-   /*for (i = keyboard.id_min; i <= keyboard.id_max; i++)
-   {
-      offset = DESC_OFFSET(&keyboard, 0, 0, i);
-
-      if (keyboard.value[offset])
-         browserWin->onRetroKeyInput(retrokey_to_qt(offset));
-   }*/
 
    browserWin->render();
    browserApp->processEvents();
