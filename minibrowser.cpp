@@ -21,6 +21,7 @@ MiniBrowser::MiniBrowser(QWidget *parent) :
 {
   ui->setupUi(this);
   ui->webView->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
+  ui->webView->settings()->setAttribute(QWebSettings::PluginsEnabled, true);
 
   connect(ui->urlLineEdit, SIGNAL(returnPressed()), this, SLOT(onURLChanged()));
 }
