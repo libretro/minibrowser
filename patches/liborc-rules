@@ -1,0 +1,20 @@
+--- rules.orig	2016-10-10 03:26:04.382075529 +0000
++++ rules	2016-10-10 03:27:42.824314270 +0000
+@@ -8,14 +8,15 @@
+ DEB_DH_AUTORECONF_ARGS += --as-needed
+ 
+ DEB_DH_STRIP_ARGS := --dbg-package=liborc-0.4-0-dbg
+-DEB_CONFIGURE_EXTRA_FLAGS := --enable-static --libdir=\$${prefix}/lib/$(DEB_HOST_MULTIARCH)
++DEB_CONFIGURE_EXTRA_FLAGS := --with-pic=yes --enable-static --libdir=\$${prefix}/lib/$(DEB_HOST_MULTIARCH)
+ APIVER := 0.4
+ SHLIBVER := 1:0.4.25
+ liborc := $(shell sed -nr 's/^Package:[[:space:]]*(liborc-$(APIVER)-[0-9]+)[[:space:]]*$$/\1/p' debian/control)
+ 
+ DEB_DH_MAKESHLIBS_ARGS_$(liborc) = -V '$(liborc) (>= $(SHLIBVER))'
+ 
+-LDFLAGS += -Wl,-z,defs -Wl,-O1 -Wl,--as-needed
++CFLAGS += -fPIC
++LDFLAGS += -Wl,-z,defs -Wl,-O1 -Wl,--as-needed -fPIC
+ DEB_MAKE_CHECK_TARGET := check || true
+ 
+ makebuilddir::

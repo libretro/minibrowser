@@ -1,0 +1,11 @@
+--- rules.orig	2016-10-10 03:40:00.112902068 +0000
++++ rules	2016-10-10 03:41:21.782670941 +0000
+@@ -2,7 +2,7 @@
+ 
+ DEB_HOST_ARCH_OS = $(shell dpkg-architecture -qDEB_HOST_ARCH_OS)
+ 
+-confflags = --disable-silent-rules --enable-static
++confflags = --disable-silent-rules --enable-static --with-pic=yes
+ ifeq (,$(findstring linux,$(DEB_HOST_ARCH_OS)))
+ # wayland is only available on linux-any
+ confflags += --disable-wayland
