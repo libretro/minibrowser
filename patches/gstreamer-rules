@@ -1,5 +1,5 @@
---- gstreamer1.0-1.8.2/debian/rules	2016-01-27 12:27:03.000000000 +0000
-+++ ../gstreamer-rules	2016-10-06 02:23:12.997905306 +0000
+--- rules.orig	2016-10-10 01:06:13.927255021 +0000
++++ rules	2016-10-10 01:06:49.600069276 +0000
 @@ -10,9 +10,9 @@
  
  DEB_DH_AUTORECONF_ARGS += --as-needed
@@ -13,12 +13,14 @@
  DEB_MAKE_CHECK_TARGET = check || true
  
  # debian package version
-@@ -201,6 +201,8 @@
+@@ -201,6 +201,10 @@
  	--disable-examples \
  	--enable-DEBUG \
  	--enable-debug \
 +	--enable-static=yes \
 +	--enable-shared=no \
++	--disable-plugin \
++	--disable-registry \
  	--libdir=\$${prefix}/lib/$(DEB_HOST_MULTIARCH) \
  	--libexecdir=\$${prefix}/lib/$(DEB_HOST_MULTIARCH)/gstreamer$(gst_abi) \
  	--with-package-name=$(GST_PACKAGE_NAME) \
