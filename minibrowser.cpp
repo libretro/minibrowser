@@ -124,6 +124,12 @@ void MiniBrowser::onMouseInput(QtMouse mouse) {
 
   if(widget) {
     if(mouse.newPos != mouse.oldPos) {
+      // restrict movement to within the window geometry
+      mouse.newPos.setX(qMin(m_img.width(), mouse.newPos.x()));
+      mouse.newPos.setX(qMax(0, mouse.newPos.x()));
+      mouse.newPos.setY(qMin(m_img.height(), mouse.newPos.y()));
+      mouse.newPos.setY(qMax(0, mouse.newPos.y()));
+
       m_mousePos = mouse.newPos;
 
       QMouseEvent *event = new QMouseEvent(QEvent::MouseMove, widget->mapFromGlobal(mouse.newPos), mouse.newPos, Qt::NoButton, Qt::NoButton, Qt::NoModifier);
