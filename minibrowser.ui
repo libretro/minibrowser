@@ -21,7 +21,7 @@
     <widget class="QWebView" name="webView">
      <property name="url">
       <url>
-       <string>http://news.google.com/</string>
+       <string>https://www.youtube.com/</string>
       </url>
      </property>
     </widget>
