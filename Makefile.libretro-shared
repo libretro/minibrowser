@@ -101,9 +101,9 @@ else
    SHARED := -shared -static-libgcc -static-libstdc++ -s -Wl,--version-script=link.T -Wl,--no-undefined
 endif
 
-QTDIR = /usr/include/qt
+CXXFLAGS += $(shell pkg-config --cflags-only-I Qt5WebKitWidgets)
 
-CXXFLAGS += -I. -I$(QTDIR) -I$(QTDIR)/QtWebKitWidgets -I$(QTDIR)/QtWebKit -I$(QTDIR)/QtWidgets -I$(QTDIR)/QtCore -I$(QTDIR)/QtGui
+CXXFLAGS += -I.
 CXXFLAGS += -DQT_NO_DEBUG -DQT_WEBKITWIDGETS_LIB -DQT_WEBKIT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DSHARED
 CXXFLAGS += -pipe -Wall -W -D_REENTRANT
 
