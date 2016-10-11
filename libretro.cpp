@@ -167,7 +167,13 @@ static QApplication *browserApp;
 static MiniBrowser *browserWin;
 
 static char browser_name[] = "minibrowser";
+
+#ifdef SHARED
+static char *browser_argv[] = {browser_name, "-platform", "offscreen", NULL};
+#else
 static char *browser_argv[] = {browser_name, NULL};
+#endif
+
 static int browser_argc = ARRAY_SIZE(browser_argv) - 1;
 
 static uint16_t x_coord;
