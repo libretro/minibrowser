@@ -27,8 +27,11 @@
 #include <QApplication>
 #include <QFontDatabase>
 #include <QFile>
+
+#ifndef SHARED
 #include <QtPlugin>
 Q_IMPORT_PLUGIN(QOffscreenIntegrationPlugin)
+#endif
 
 #ifdef RARCH_INTERNAL
 #include "internal_cores.h"
