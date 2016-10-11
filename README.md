@@ -55,8 +55,6 @@ zlib1g
 
 You will find in the patches/ directory, diffs of the debian/rules files for each of these which can be used to rebuild the packages with the appropriate flags using "dpkg-buildpackage". The resulting libraries should be copied into libs/ so that the minibrowser makefile can find them. Please see Makefile.libretro for an exact listing of each file within libs/ that is needed.
 
-Currently several system fonts are searched and if found, will be used for text rendering. As a fallback, GNU unifont is used. Make sure unifont.ttf is in your build directory before compiling minibrowser, as this file will be packed in as a resource.
-
 Once all the required libraries are ready, then compile the libretro core with:
 
 make -f Makefile.libretro
