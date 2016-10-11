@@ -22,7 +22,7 @@ To compile a shared library version for libretro:
 
 make -f Makefile.libretro-shared
 
-This will output two files, libminibrowser.so and minibrowser_libretro.so. Both of these files must stay in the same directory to be used with libretro, but minibrowser_libretro.so is the file you want to load with your frontend.
+This will output minibrowser_libretro.so which can be loaded just like any other libretro core.
 
 Static Library
 --------
