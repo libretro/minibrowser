@@ -102,7 +102,7 @@ else
 endif
 
 XLIB         = /usr/lib/x86_64-linux-gnu
-QTSRC        = /home/bp/Qt/minimal/no-opengl/qt-everywhere-opensource-src-5.5.1
+QTSRC        = $(HOME)/Qt/minimal/no-opengl/qt-everywhere-opensource-src-5.5.1
 QTDIR        = /usr/local/Qt-static-nongl-5.5.1
 QTLIBDIR     = $(QTDIR)/lib
 QTINCDIR     = $(QTDIR)/include
@@ -117,9 +117,8 @@ CXXFLAGS += -I. -I$(QTDIR)/include -I$(QTDIR)/include/QtWebKitWidgets -I$(QTDIR)
 CXXFLAGS += -DQT_NO_DEBUG -DQT_WEBKITWIDGETS_LIB -DQT_WEBKIT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CXXFLAGS += -pipe -Wall -W -D_REENTRANT
 
-#-I. -I/usr/local/Qt-static-nongl-5.5.1/include -I/usr/local/Qt-static-nongl-5.5.1/include/QtWebKitWidgets -I/usr/local/Qt-static-nongl-5.5.1/include/QtWebKit -I/usr/local/Qt-static-nongl-5.5.1/include/QtWidgets -I/usr/local/Qt-static-nongl-5.5.1/include/    QtGui -I/usr/local/Qt-static-nongl-5.5.1/include/QtNetwork -I/usr/local/Qt-static-nongl-5.5.1/include/QtCore -I. -I/usr/local/Qt-static-nongl-5.5.1/mkspecs/linux-g++
+LDFLAGS += $(QTPLAT)/libqoffscreen.a $(QTLIBDIR)/libQt5PlatformSupport.a $(XLIB)/libfontconfig.a libs/libfreetype.a -ludev libs/libz.a -Wl,--whole-archive $(QTLIBDIR)/libQt5PrintSupport.a $(QTLIBDIR)/libQt5WebKitWidgets.a $(QTLIBDIR)/libQt5WebKit.a $(WKITLIB)/libWebKit1.a $(WCORELIB)/libWebCore.a $(LEVELDBLIB)/libleveldb.a $(JSCORELIB)/libJavaScriptCore.a $(WTFLIB)/libWTF.a -Wl,--no-whole-archive libs/libxml2.a libs/libgio-2.0.a -Wl,--whole-archive libs/libgstapp-1.0.a libs/libgstapp.a libs/libgsttag-1.0.a libs/libgstplayback.a libs/libgstpbutils-1.0.a libs/libgstvideo-1.0.a libs/libgstaudio-1.0.a libs/libgstbase-1.0.a libs/libgstreamer-1.0.a libs/libgstlibav.a libs/libgsttypefindfunctions.a libs/libgstisomp4.a libs/libgstvideoparsersbad.a libs/libgstaudioparsers.a libs/libgstpulse.a libs/libgstvideofilter.a libs/libgstvideoconvert.a libs/libgstvideoscale.a libs/libgstdeinterlace.a libs/libgstvolume.a libs/libgstaudioconvert.a libs/libgstaudioresample.a libs/libgstcoreelements.a libs/libgstdebugutilsbad.a libs/libgstaudiofx.a libs/libgstfft-1.0.a libs/libgstautodetect.a libs/libgstriff-1.0.a libs/libgstrtp-1.0.a libs/libgstcodecparsers-1.0.a libs/libavcodec.a libs/libavdevice.a libs/libavfilter.a libs/libavformat.a libs/libavutil.a libs/libswresample.a $(XLIB)/libvpx.a -Wl,--no-whole-archive libs/libgobject-2.0.a libs/libgmodule-2.0.a libs/libgthread-2.0.a libs/libglib-2.0.a libs/libsqlite3.a $(QTLIBDIR)/libQt5Sensors.a $(QTLIBDIR)/libQt5Positioning.a $(QTLIBDIR)/libQt5Sql.a $(QTLIBDIR)/libQt5Widgets.a $(QTLIBDIR)/libQt5Gui.a $(QTLIBDIR)/libqtharfbuzzng.a $(QTLIBDIR)/libQt5Network.a libs/libssl.a libs/libcrypto.a $(QTLIBDIR)/libQt5Core.a libs/libicui18n.a libs/libicuuc.a libs/libicudata.a $(QTLIBDIR)/libqtpcre.a libs/libpcre.a libs/liborc-0.4.a libs/liborc-test-0.4.a libs/libva.a -lm -ldl -lrt -lpthread -lpulse -lz -lffi -llzma -lbz2
 
-LDFLAGS += libminibrowser.a $(QTPLAT)/libqoffscreen.a $(QTLIBDIR)/libQt5PlatformSupport.a $(XLIB)/libfontconfig.a libs/libfreetype.a -ludev libs/libz.a -Wl,--whole-archive $(QTLIBDIR)/libQt5PrintSupport.a $(QTLIBDIR)/libQt5WebKitWidgets.a $(QTLIBDIR)/libQt5WebKit.a $(WKITLIB)/libWebKit1.a $(WCORELIB)/libWebCore.a $(LEVELDBLIB)/libleveldb.a $(JSCORELIB)/libJavaScriptCore.a $(WTFLIB)/libWTF.a -Wl,--no-whole-archive libs/libxml2.a libs/libgio-2.0.a -Wl,--whole-archive libs/libgstapp-1.0.a libs/libgstapp.a libs/libgsttag-1.0.a libs/libgstplayback.a libs/libgstpbutils-1.0.a libs/libgstvideo-1.0.a libs/libgstaudio-1.0.a libs/libgstbase-1.0.a libs/libgstreamer-1.0.a libs/libgstlibav.a libs/libgsttypefindfunctions.a libs/libgstisomp4.a libs/libgstvideoparsersbad.a libs/libgstaudioparsers.a libs/libgstpulse.a libs/libgstvideofilter.a libs/libgstvideoconvert.a libs/libgstvideoscale.a libs/libgstdeinterlace.a libs/libgstvolume.a libs/libgstaudioconvert.a libs/libgstaudioresample.a libs/libgstcoreelements.a libs/libgstdebugutilsbad.a libs/libgstaudiofx.a libs/libgstfft-1.0.a libs/libgstautodetect.a libs/libgstriff-1.0.a libs/libgstrtp-1.0.a libs/libgstcodecparsers-1.0.a libs/libavcodec.a libs/libavdevice.a libs/libavfilter.a libs/libavformat.a libs/libavutil.a libs/libswresample.a $(XLIB)/libvpx.a -Wl,--no-whole-archive libs/libgobject-2.0.a libs/libgmodule-2.0.a libs/libgthread-2.0.a libs/libglib-2.0.a libs/libsqlite3.a $(QTLIBDIR)/libQt5Sensors.a $(QTLIBDIR)/libQt5Positioning.a $(QTLIBDIR)/libQt5Sql.a $(QTLIBDIR)/libQt5Widgets.a $(QTLIBDIR)/libQt5Gui.a $(QTLIBDIR)/libqtharfbuzzng.a $(QTLIBDIR)/libQt5Network.a libs/libssl.a libs/libcrypto.a $(QTLIBDIR)/libQt5Core.a libs/libicui18n.a libs/libicuuc.a libs/libicudata.a $(QTLIBDIR)/libqtpcre.a libs/libpcre.a libs/liborc-0.4.a libs/liborc-test-0.4.a libs/libva.a -lm -ldl -lrt -lpthread -lpulse -lz -lffi -llzma -lbz2
 ifeq ($(platform), win)
 LDFLAGS += -lws2_32
 endif
@@ -130,7 +129,8 @@ else
    CXXFLAGS += -O3
 endif
 
-OBJECTS :=  libretro.o
+QT_OBJECTS := ui_minibrowser.h qrc_res.cpp moc_minibrowser.cpp
+OBJECTS :=  libretro.o minibrowser.o moc_minibrowser.o qrc_res.o
 
 #CXXFLAGS += -pedantic $(fpic)
 CXXFLAGS += $(fpic)
@@ -149,7 +149,16 @@ endif
 
 all: $(TARGET)
 
-$(TARGET): $(OBJECTS)
+ui_minibrowser.h:
+	uic minibrowser.ui -o ui_minibrowser.h
+
+qrc_res.cpp:
+	rcc -name res res.qrc -o qrc_res.cpp
+
+moc_minibrowser.cpp:
+	moc $(shell pkg-config --cflags-only-I Qt5WebKitWidgets) minibrowser.h -o moc_minibrowser.cpp
+
+$(TARGET): $(QT_OBJECTS) $(OBJECTS)
 ifeq ($(STATIC_LINKING), 1)
 	$(AR) rcs $@ $(OBJECTS)
 else

@@ -107,7 +107,7 @@ CXXFLAGS += -I.
 CXXFLAGS += -DQT_NO_DEBUG -DQT_WEBKITWIDGETS_LIB -DQT_WEBKIT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DSHARED
 CXXFLAGS += -pipe -Wall -W -D_REENTRANT
 
-LDFLAGS += -L. -lminibrowser -lQt5PrintSupport -lQt5WebKitWidgets -lQt5WebKit -lQt5Sql -lQt5Widgets -lQt5Gui -lQt5Network -lssl -lcrypto -lQt5Core -licui18n -licuuc -licudata -lm -ldl -lrt -lpthread -lpulse -lz -lffi -llzma -lbz2 -Wl,-rpath,.
+LDFLAGS += -lQt5PrintSupport -lQt5WebKitWidgets -lQt5WebKit -lQt5Sql -lQt5Widgets -lQt5Gui -lQt5Network -lssl -lcrypto -lQt5Core -licui18n -licuuc -licudata -lm -ldl -lrt -lpthread -lpulse -lz -lffi -llzma -lbz2 -Wl,-rpath,.
 ifeq ($(platform), win)
 LDFLAGS += -lws2_32
 endif
@@ -118,7 +118,8 @@ else
    CXXFLAGS += -O3
 endif
 
-OBJECTS :=  libretro.o
+QT_OBJECTS := ui_minibrowser.h qrc_res.cpp moc_minibrowser.cpp
+OBJECTS := libretro.o minibrowser.o moc_minibrowser.o qrc_res.o
 
 #CXXFLAGS += -pedantic $(fpic)
 CXXFLAGS += $(fpic)
@@ -137,7 +138,16 @@ endif
 
 all: $(TARGET)
 
-$(TARGET): $(OBJECTS)
+ui_minibrowser.h:
+	uic minibrowser.ui -o ui_minibrowser.h
+
+qrc_res.cpp:
+	rcc -name res res.qrc -o qrc_res.cpp
+
+moc_minibrowser.cpp:
+	moc $(shell pkg-config --cflags-only-I Qt5WebKitWidgets) minibrowser.h -o moc_minibrowser.cpp
+
+$(TARGET): $(QT_OBJECTS) $(OBJECTS)
 ifeq ($(STATIC_LINKING), 1)
 	$(AR) rcs $@ $(OBJECTS)
 else
@@ -148,7 +158,7 @@ endif
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
-	rm -f $(OBJECTS) $(TARGET)
+	rm -f $(QT_OBJECTS) $(OBJECTS) $(TARGET)
 
 .PHONY: clean
 
