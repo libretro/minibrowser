@@ -4,13 +4,30 @@ NOTE: This core has only been tested on Linux and is not guaranteed to work on a
 
 The browser uses the webkit-based QWebView class which is available in Qt versions 5.5 and earlier. After 5.5, QWebView was replaced with QWebEngine, which is chromium-based, however that class does not yet support static linking, so for now we use the webkit version instead.
 
+NOTE: Some Linux distributions (ArchLinux) seem to ship QWebView even with newer Qt versions like 5.7 where it has been removed upstream. In this case you can ignore any text that mentions requiring Qt 5.5 or earlier.
+
+Standalone Application
+--------
+
 If you want to compile the browser as a simple standalone desktop application (outside of libretro), you can do so with (assuming Qt 5.5 or earlier):
 
 qmake minibrowser-apptest.pro
 
 make
 
-To compile the libretro version, much more work is needed. A custom static build of Qt is required, with many options disabled (or set to be compiled in) to get rid of the extra dependencies and platform support that isn't used. Also, most system libraries, even if they do provide a static version to link with, usually are not provided with -fPIC enabled, so this is unsuitable for a libretro core.
+Shared Library
+--------
+
+To compile a shared library version for libretro:
+
+make -f Makefile.libretro-shared
+
+This will output two files, libminibrowser.so and minibrowser_libretro.so. Both of these files must stay in the same directory to be used with libretro, but minibrowser_libretro.so is the file you want to load with your frontend.
+
+Static Library
+--------
+
+To compile a static libretro core, much more work is needed. A custom static build of Qt is required, with many options disabled (or set to be compiled in) to get rid of the extra dependencies and platform support that isn't used. Also, most system libraries, even if they do provide a static version to link with, usually are not provided with -fPIC enabled, so this is unsuitable for a libretro core.
 
 To compile Qt, you will need to download the "qt-everywhere-opensource-src" package from www.qt.io, with a version no newer than 5.5.1. The files in the config/ directory provide the options to Qt's ./configure script that are known to work (NOTE: the OpenGL version is currently untested).
 
@@ -42,10 +59,11 @@ Currently several system fonts are searched and if found, will be used for text 
 
 Once all the required libraries are ready, then compile the libretro core with:
 
-/path/to/static/Qt/bin/qmake minibrowser.pro
-
-make
-
 make -f Makefile.libretro
 
-A precompiled core for Linux x64 (made on Ubuntu 16.04) is available [here](http://buildbot.fiveforty.net/minibrowser_libretro.so).
+This will output minibrowser_libretro.so which can be loaded just like any other libretro core.
+
+Binary
+--------
+
+A precompiled static core for Linux x64 (made on Ubuntu 16.04) is available [here](http://buildbot.fiveforty.net/minibrowser_libretro.so).
